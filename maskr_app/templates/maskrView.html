@@ -36,37 +36,28 @@
     </div>
   </section>
 
-  <section class ="mb-36" id ="upload">
-    <div class="w-full flex justify-center relative text-black p-4 rounded-lg mt-10">
-        <button class="absolute bg-black rounded-lg text-white px-4 py-2 flex items-center gap-2 hover:bg-gray-800 transition duration-200">
+  <section class ="" id ="upload">
+    <form method="POST" enctype="multipart/form-data" id="upload-form">
+      {% csrf_token %}
+      <div class="w-full flex justify-center relative text-black p-4 rounded-lg mt-10">
+        <label for="file-upload" class="absolute bg-black rounded-lg text-white px-4 py-2 flex items-center gap-2 hover:bg-gray-800 transition duration-200">
           <img class="w-5" src="{% static 'images/upload.png' %}" alt="">
           <span class="text-sm font-medium">Upload File</span>
-        </button>
-    </div>
+        </label>
+        <input id="file-upload" type="file" name="image" class="hidden" onchange="document.getElementById('upload-form').submit();">
+      </div>
+    </form>
 
     {% if uploaded %}
-    <div id="screen">
-      <!-- Gradient overlay -->
-      <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500"></div>
-      
-      {% if masked %}
+    <div id="screen">      
       <div class="relative">
-        <img src="image.jpg" alt="My Image" class="w-full">
+        <img class="w-full" src="{{ uploaded.image.url }}" alt="Procesed Image" >
       </div>
-      {% endif %}
-
-      <!-- Content -->
-      <div class="px-4 py-16 lg:py-24">
-        <h2 class="text-3xl font-bold mb-4">Section Title</h2>
-        <p class="text-lg leading-7 mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <a href="#" class="bg-white text-gray-900 py-2 px-4 rounded-lg shadow">Button</a>
-      </div>
-    </div>
     {% endif %}
   </section>
   
 
-  <footer class="bg-white py-6 inset-x-0 w-full p-2 h-48 bottom-0" id="contact">
+  <footer class="bg-white py-6 inset-x-0 w-full p-2 h-48 bottom-0 mt-36 " id="contact">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex ml-20 mr-20 justify-between">
         <!-- Github section -->
