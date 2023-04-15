@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+{% load static %}
+{% load static tailwind_tags %}
+
+<head>
+   {% tailwind_css %}
+    <link rel="icon" href="{% static 'images/logo.ico' %}" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/base.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=League+Spartan:wght@800&display=swap" rel="stylesheet">
+    <title>{% block title %}maskr{% endblock %}</title>
+</head>
+<body class="bg-gradient-to-r from-blue-500 via-purple-500 to-red-500">
+    {% block content %}
+    This is the default content.
+    {% endblock %}
+</body>
+</html>

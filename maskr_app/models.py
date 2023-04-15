@@ -1,8 +1,7 @@
 from django.db import models
 
-class saved_images(models.Model):
-    last_updated = models.DateTimeField(auto_now=True, editable=False)
-    created = models.DateTimeField(auto_now_add=True, editable=False)
-    title = models.TextField(max_length=40)
+class Images(models.Model):
+    image_file = models.ImageField(upload_to='images/')
+    name = models.CharField(max_length=255)
     class Meta:
         pass
