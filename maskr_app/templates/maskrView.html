@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-  <nav class="bg-white sticky flex top-0 text-center justify-between p-1 h-20">
+  <nav class="bg-white sticky flex top-0 text-center justify-between p-1 h-20 z-50">
     <div class='flex relative ml-10'>
       <img class="w-25 !important" src="{% static 'images/maskr_logo.png' %}" alt="logo"/>
       <span class="ml-14 absolute font-spartan mt-5 font-size text-2xl">maskr</span>
@@ -10,15 +10,15 @@
     <div class='flex justify-between p-4 font-ubuntu font-bold mt-2'>
         <img src="" alt="" />
         <img src="" alt="" />
-        <h3 class='sm:mr-0 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="scrolllink" href="#about">About</a></h3>
-        <h3 class='sm:mr-0 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="scrolllink" href="#upload">Upload</a></h3>
-        <h3 class='sm:mr-0 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="scrolllink" href="#contact">Contact</a></h3>
+        <h3 class='sm:mr-4 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="scrolllink" href="#about">About</a></h3>
+        <h3 class='sm:mr-4 md:mr-4 lg:mr-6 sm:block xl:mr-10 mr-16 hidden'><a class="scrolllink" href="#upload">Upload</a></h3>
+        <h3 class='sm:mr-4 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="scrolllink" href="#contact">Contact</a></h3>
     </div>
   </nav>
 
   <section class="py-16" id ="about">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-8">About Our Application</h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 ">About Our Application</h2>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <div class="bg-white rounded-lg shadow-lg p-6">
           <h3 class="text-xl font-medium text-gray-900 mb-4 text-center">Image Masking with <span class="underline">AI</span></h3>
@@ -37,8 +37,11 @@
   </section>
 
   <section class ="mb-36" id ="upload">
-    <form method="POST" enctype="multipart/form-data" id="upload-form">
+    <form method="POST" enctype="multipart/form-data" id="upload-form" class="mb-20">
       {% csrf_token %}
+      <div class="flex items-center justify-center">
+        <input type="text" name="prompt" placeholder="Enter prompt here..." class="w-20 text-black font-ubuntu font-bold p-2 rounded-md mt-5"/>
+      </div>
       <div class="w-full flex justify-center relative text-black p-4 rounded-lg mt-10">
         <label for="file-upload" class="absolute bg-black rounded-lg text-white px-4 py-2 flex items-center gap-2 hover:bg-gray-800 transition duration-200">
           <img class="w-5" src="{% static 'images/upload.png' %}" alt="">
@@ -49,20 +52,37 @@
     </form>
 
     {% if uploaded %}
-    <div id="screen">      
-      <div class="relative">
+      <div id="screen" class="mx-auto grid grid-cols-2 justify-items-center">
+        <div class="w-1/2 bg-white rounded-lg p-4">
+          {% if processed %}
+            <h2 class="text-xl font-ubuntu font-bold text-center p-2">Before</h2> 
+          {% endif %}   
+          <img class="m-auto rounded-md w-[256px] h-[256px] max-h-[256px] max-w-[256px] !important" src="{{ uploaded }}" alt="Before Processed Image">
+        </div>
         {% if processed %}
-        <h2>Before</h2>
+          <div class="w-1/2 bg-white rounded-lg p-4">
+            <h2 class="text-xl font-ubuntu font-bold text-center p-2">After</h2>
+            <img class="m-auto rounded-md" src="{{ processed }}" alt="After Processed Image">
+          </div>
         {% endif %}
-        <img class="w-1/2 h-1/2" src="{{ uploaded.image.url }}" alt="Before Procesed Image" >
+        <div class="flex justify-center items-center mt-2">
+          <label class="text-md font-ubuntu font-bold text-center p-2 bg-black text-white rounded-lg"><a href="{{ processed }}">Save Image</a></label>
+        </div>      
       </div>
-      {% if processed %}
-      <div>
-        <h2>After</h2>
-        <img class="w-1/2 h-1/2" src="{{ processed.url }}" alt="After Procesed Image" >
-      </div>
-      {% endif %}
     {% endif %}
+
+    {% if processed and not uploaded %}
+      <div id="screen" class="mx-auto grid grid-cols-2 justify-items-center">
+        <div class="w-full bg-white rounded-lg p-4">
+          <h2 class="text-xl font-ubuntu font-bold text-center p-2">Created Image</h2>
+          <img class="m-auto rounded-md" src="{{ processed }}" alt="After Processed Image">
+        </div>
+        <div class="flex justify-center items-center mt-2">
+          <label class="text-md font-ubuntu font-bold text-center p-2 bg-black text-white rounded-lg"><a href="{{ processed }}">Save Image</a></label>
+        </div>
+      </div>    
+    {% endif %}
+
   </section>
   
 

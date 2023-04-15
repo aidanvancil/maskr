@@ -5,3 +5,9 @@ html::-webkit-scrollbar {
 html {
   scroll-behavior: smooth;
 }
+
+div#screen {
+    justify-content: space-around;
+    justify-items: center;
+}
+}
