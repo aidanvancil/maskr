@@ -36,7 +36,7 @@
     </div>
   </section>
 
-  <section class ="" id ="upload">
+  <section class ="mb-36" id ="upload">
     <form method="POST" enctype="multipart/form-data" id="upload-form">
       {% csrf_token %}
       <div class="w-full flex justify-center relative text-black p-4 rounded-lg mt-10">
@@ -51,13 +51,22 @@
     {% if uploaded %}
     <div id="screen">      
       <div class="relative">
-        <img class="w-full" src="{{ uploaded.image.url }}" alt="Procesed Image" >
+        {% if processed %}
+        <h2>Before</h2>
+        {% endif %}
+        <img class="w-1/2 h-1/2" src="{{ uploaded.image.url }}" alt="Before Procesed Image" >
       </div>
+      {% if processed %}
+      <div>
+        <h2>After</h2>
+        <img class="w-1/2 h-1/2" src="{{ processed.url }}" alt="After Procesed Image" >
+      </div>
+      {% endif %}
     {% endif %}
   </section>
   
 
-  <footer class="bg-white py-6 inset-x-0 w-full p-2 h-48 bottom-0 mt-36 " id="contact">
+  <footer class="bg-white py-6 inset-x-0 w-full p-2 h-48 bottom-0" id="contact">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex ml-20 mr-20 justify-between">
         <!-- Github section -->
