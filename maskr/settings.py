@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "maskr_app/static",
 ]
 
 INSTALLED_APPS = [

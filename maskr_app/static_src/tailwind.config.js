@@ -47,6 +47,11 @@ module.exports = {
             ubuntu: ['"Ubuntu"', 'sans-serif'],
             spartan: ['"League Spartan"', 'sans-serif'],
         },
+        variants: {
+            extend: {
+              textColor: ['hover'],
+            }
+        },
     },
     plugins: [
         /**

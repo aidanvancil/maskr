@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-  <nav class="bg-white flex text-center justify-between p-1 h-20">
+  <nav class="bg-white sticky flex top-0 text-center justify-between p-1 h-20">
     <div class='flex relative ml-10'>
       <img class="w-25 !important" src="{% static 'images/maskr_logo.png' %}" alt="logo"/>
       <span class="ml-14 absolute font-spartan mt-5 font-size text-2xl">maskr</span>
@@ -10,47 +10,72 @@
     <div class='flex justify-between p-4 font-ubuntu font-bold mt-2'>
         <img src="" alt="" />
         <img src="" alt="" />
-        <h3 class='sm:mr-0 md:mr-2 lg:mr-4 xl:mr-8 mr-10'>Log In</h3>
-        <h3 class='sm:mr-0 md:mr-2 lg:mr-4 xl:mr-8 mr-10'>Sign Up</h3>
+        <h3 class='sm:mr-0 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="scrolllink" href="#about">About</a></h3>
+        <h3 class='sm:mr-0 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="scrolllink" href="#upload">Upload</a></h3>
+        <h3 class='sm:mr-0 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="scrolllink" href="#contact">Contact</a></h3>
     </div>
   </nav>
 
-  {% if uploaded %}
-  <section>
-    <div class="relative" id="upload">
-      <img src="" alt="">
-      <button class="absolute"></button>
-    </div>
-    <div id="screen">
-      
-    <!-- Gradient overlay -->
-    <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500"></div>
-    
-    {% if masked %}
-    <div class="relative">
-      <img src="image.jpg" alt="My Image" class="w-full">
-    </div>
-    {% endif %}
-
-    <!-- Content -->
-    <div class="px-4 py-16 lg:py-24">
-      <h2 class="text-3xl font-bold mb-4">Section Title</h2>
-      <p class="text-lg leading-7 mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <a href="#" class="bg-white text-gray-900 py-2 px-4 rounded-lg shadow">Button</a>
-    </div>
+  <section class="py-16" id ="about">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">About Our Application</h2>
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-medium text-gray-900 mb-4 text-center">Image Masking with <span class="underline">AI</span></h3>
+          <p class="text-gray-700 mb-4">Our application uses artificial intelligence to generate masks for user images based on the objects and landscapes detected in the image. With just a few clicks, you can easily select the mask that you want to save.</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-medium text-gray-900 mb-4 text-center">Easy to Use</h3>
+          <p class="text-gray-700 mb-4">Our application is designed to be user-friendly and easy to use, even if you have no experience with image processing or AI. Simply upload your images and let our system do the rest!</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-medium text-gray-900 mb-4 text-center">Customizable Settings</h3>
+          <p class="text-gray-700 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, earum deserunt! Neque cum itaque modi eaque veniam ut fuga, maxime soluta hic error et voluptatum fugiat officiis dignissimos repellat sint.</p>
+        </div>
+      </div>
     </div>
   </section>
-  {% endif %}
-  <footer class="bg-white py-6 fixed inset-x-0 w-full p-2 h-48 bottom-0">
+
+  <section class ="mb-36" id ="upload">
+    <div class="w-full flex justify-center relative text-black p-4 rounded-lg mt-10">
+        <button class="absolute bg-black rounded-lg text-white px-4 py-2 flex items-center gap-2 hover:bg-gray-800 transition duration-200">
+          <img class="w-5" src="{% static 'images/upload.png' %}" alt="">
+          <span class="text-sm font-medium">Upload File</span>
+        </button>
+    </div>
+
+    {% if uploaded %}
+    <div id="screen">
+      <!-- Gradient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+      
+      {% if masked %}
+      <div class="relative">
+        <img src="image.jpg" alt="My Image" class="w-full">
+      </div>
+      {% endif %}
+
+      <!-- Content -->
+      <div class="px-4 py-16 lg:py-24">
+        <h2 class="text-3xl font-bold mb-4">Section Title</h2>
+        <p class="text-lg leading-7 mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <a href="#" class="bg-white text-gray-900 py-2 px-4 rounded-lg shadow">Button</a>
+      </div>
+    </div>
+    {% endif %}
+  </section>
+  
+
+  <footer class="bg-white py-6 inset-x-0 w-full p-2 h-48 bottom-0" id="contact">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex ml-20 mr-20 justify-between">
         <!-- Github section -->
         <div class="mb-4 md:mb-0 sm:mb-0">
           <h3 class="text-lg font-medium mb-2">Github</h3>
           <ul class="space-y-1">
-            <li><a href="#">Author 1</a></li>
-            <li><a href="#">Author 2</a></li>
-            <li><a href="#">Author 3</a></li>
+            <li><a class="hover:underline" href="https://github.com/a-gorum">a-gorum</a></li>
+            <li><a class="hover:underline" href="https://github.com/aidanvancil">aidanvancil</a></li>
+            <li><a class="hover:underline" href="https://github.com/Buslon-Brian">Buslon-Brian</a></li>
           </ul>
         </div>
   
@@ -58,9 +83,9 @@
         <div class="mb-4 sm:mb-0 hidden sm:block">
           <h3 class="text-lg font-medium mb-2">LinkedIn</h3>
           <ul class="space-y-1">
-            <li><a href="#">Author 1</a></li>
-            <li><a href="#">Author 2</a></li>
-            <li><a href="#">Author 3</a></li>
+            <li><a class="hover:underline" href="#">Andrew G.</a></li>
+            <li><a class="hover:underline" href="https://www.linkedin.com/in/aidan-vancil">Aidan V.</a></li>
+            <li><a class="hover:underline" href="#">Brian B.</a></li>
           </ul>
         </div>
   
@@ -68,8 +93,8 @@
         <div class="mb-4 md:mb-0">
           <h3 class="text-lg font-medium mb-2">Legal</h3>
           <ul class="space-y-1">
-            <li><a href="#">Terms of Use</a></li>
-            <li><a href="#">Privacy Policy</a></li>
+            <li><a class="hover:underline" href="https://www.termsofservicegenerator.net/live.php?token=YZYhfT5R7sZgK9NCR5H9L4K2yqcqXDNr">Terms of Use</a></li>
+            <li><a class="hover:underline" href="https://www.gdprprivacypolicy.net/live.php?token=LzX5Nr833bV50I8hmQDf0Y2p8sr5tJab">Privacy Policy</a></li>
           </ul>
         </div>
   
@@ -77,9 +102,15 @@
         <div class="mb-4 md:mb-0 hidden md:block">
           <h3 class="text-lg font-medium mb-2">Contact</h3>
           <ul class="space-y-1">
-            <li><a href="#">Email 1</a></li>
-            <li><a href="#">Email 2</a></li>
-            <li><a href="#">Email 3</a></li>
+            <li><a class="hover:underline" href="mailto:your-email@example.com?
+              subject=Questions%20For%20Aidan&
+              body=Hello%20Aidan!%20I%20wanted%20to%20learn%20more%20about%20your%20website!">aidan.c.vancil@gmail.com</a></li>
+            <li><a class="hover:underline" href="mailto:your-email@example.com?
+              subject=Questions%20For%20Andrew&
+              body=Hello%20Andrew!%20I%20wanted%20to%20learn%20more%20about%20your%20website!">agorum@nevada.unr.edu</a></li>
+            <li><a class="hover:underline" href="mailto:your-email@example.com?
+              subject=Questions%20For%20Brian&
+              body=Hello%20Brian!%20I%20wanted%20to%20learn%20more%20about%20your%20website!">bbuslon@nevada.unr.edu</a></li>
           </ul>
         </div>
       </div>
