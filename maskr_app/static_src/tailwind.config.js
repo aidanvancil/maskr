@@ -43,6 +43,10 @@ module.exports = {
     ],
     theme: {
         extend: {},
+        fontFamily: {
+            ubuntu: ['"Ubuntu"', 'sans-serif'],
+            spartan: ['"League Spartan"', 'sans-serif'],
+        },
     },
     plugins: [
         /**

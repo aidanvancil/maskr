@@ -1,6 +1,89 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-  <h1 class="text-black">maskr</h1>
+  <nav class="bg-white flex text-center justify-between p-1 h-20">
+    <div class='flex relative ml-10'>
+      <img class="w-25 !important" src="{% static 'images/maskr_logo.png' %}" alt="logo"/>
+      <span class="ml-14 absolute font-spartan mt-5 font-size text-2xl">maskr</span>
+    </div>
+    <div class='flex justify-between p-4 font-ubuntu font-bold mt-2'>
+        <img src="" alt="" />
+        <img src="" alt="" />
+        <h3 class='sm:mr-0 md:mr-2 lg:mr-4 xl:mr-8 mr-10'>Log In</h3>
+        <h3 class='sm:mr-0 md:mr-2 lg:mr-4 xl:mr-8 mr-10'>Sign Up</h3>
+    </div>
+  </nav>
+
+  {% if uploaded %}
+  <section>
+    <div class="relative" id="upload">
+      <img src="" alt="">
+      <button class="absolute"></button>
+    </div>
+    <div id="screen">
+      
+    <!-- Gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+    
+    {% if masked %}
+    <div class="relative">
+      <img src="image.jpg" alt="My Image" class="w-full">
+    </div>
+    {% endif %}
+
+    <!-- Content -->
+    <div class="px-4 py-16 lg:py-24">
+      <h2 class="text-3xl font-bold mb-4">Section Title</h2>
+      <p class="text-lg leading-7 mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <a href="#" class="bg-white text-gray-900 py-2 px-4 rounded-lg shadow">Button</a>
+    </div>
+    </div>
+  </section>
+  {% endif %}
+  <footer class="bg-white py-6 fixed inset-x-0 w-full p-2 h-48 bottom-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex ml-20 mr-20 justify-between">
+        <!-- Github section -->
+        <div class="mb-4 md:mb-0 sm:mb-0">
+          <h3 class="text-lg font-medium mb-2">Github</h3>
+          <ul class="space-y-1">
+            <li><a href="#">Author 1</a></li>
+            <li><a href="#">Author 2</a></li>
+            <li><a href="#">Author 3</a></li>
+          </ul>
+        </div>
+  
+        <!-- LinkedIn section -->
+        <div class="mb-4 sm:mb-0 hidden sm:block">
+          <h3 class="text-lg font-medium mb-2">LinkedIn</h3>
+          <ul class="space-y-1">
+            <li><a href="#">Author 1</a></li>
+            <li><a href="#">Author 2</a></li>
+            <li><a href="#">Author 3</a></li>
+          </ul>
+        </div>
+  
+        <!-- Legal section -->
+        <div class="mb-4 md:mb-0">
+          <h3 class="text-lg font-medium mb-2">Legal</h3>
+          <ul class="space-y-1">
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+  
+        <!-- Contact section -->
+        <div class="mb-4 md:mb-0 hidden md:block">
+          <h3 class="text-lg font-medium mb-2">Contact</h3>
+          <ul class="space-y-1">
+            <li><a href="#">Email 1</a></li>
+            <li><a href="#">Email 2</a></li>
+            <li><a href="#">Email 3</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
   
 {% endblock %}
