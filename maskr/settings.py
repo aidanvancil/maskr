@@ -11,10 +11,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+TAILWIND_APP_NAME = 'maskr_app'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -28,7 +29,14 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+MEDIA_URL = '/media/'
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 # Application definition
+STATICFILES_DIRS = [
+    BASE_DIR / "maskr_app/static",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'maskr_app',
+    'tailwind',
+    'django_browser_reload',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'maskr.urls'
@@ -66,6 +77,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 WSGI_APPLICATION = 'maskr.wsgi.application'
