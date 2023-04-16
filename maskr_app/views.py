@@ -11,7 +11,6 @@ env = environ.Env()
 environ.Env.read_env()
 
 openai.api_key = env("OPENAI_KEY")
-img_key = env("IMG_API_KEY")
 class maskrView(View):
     def __init__(self, *args, **kwargs):
         super(maskrView, self).__init__(*args, **kwargs)
@@ -31,8 +30,8 @@ class maskrView(View):
             img_resized = Image.open(image_obj.image.path)
             img_resized = img_resized.resize((256, 256))
             img_resized.save("demo.png", "")
-            print(prompt_t)
-            if prompt_t.isalpha():
+            prompt_temp = prompt_t.replace(' ', '')
+            if prompt_temp.isalpha():
                 resp = openai.Image.create_edit( 
                     image=open("demo.png", "rb"), 
                     prompt=prompt_t, 
@@ -43,7 +42,7 @@ class maskrView(View):
                 return render(request, 'maskrView.html', {'form': form, 'uploaded': image_obj.image.url, 'processed': image_url})
             else:
                 resp = openai.Image.create_variation(
-                    image=open("demo.png", "rb"),
+                    image=open("demo.png", "rb"),  
                     n=1,
                     size="256x256"
                 )
@@ -52,7 +51,8 @@ class maskrView(View):
         else:
             form = ImgForm()
             prompt_t = request.POST.get('prompt')
-            if not prompt_t.isalpha():
+            prompt_temp = prompt_t.replace(' ', '')
+            if not prompt_temp.isalpha():
                 return render(request, 'maskrView.html')
             resp = openai.Image.create(
                         prompt=prompt_t,
