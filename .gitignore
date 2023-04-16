@@ -26,6 +26,8 @@ share/python-wheels/
 *.egg
 MANIFEST
 model.pth
+db.sqlite3
+demo.png
 
 
 maskr/settings.py
