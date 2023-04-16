@@ -10,41 +10,45 @@
     <div class='flex justify-between p-4 font-ubuntu font-bold mt-2'>
         <img src="" alt="" />
         <img src="" alt="" />
-        <h3 class='sm:mr-4 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="scrolllink" href="#about">About</a></h3>
-        <h3 class='sm:mr-4 md:mr-4 lg:mr-6 sm:block xl:mr-10 mr-16 hidden'><a class="scrolllink" href="#upload">Upload</a></h3>
-        <h3 class='sm:mr-4 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="scrolllink" href="#contact">Contact</a></h3>
+        <h3 class='sm:mr-4 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="underline-animation" href="#about">About</a></h3>
+        <h3 class='sm:mr-4 md:mr-4 lg:mr-6 sm:block xl:mr-10 mr-16 hidden transition-transform 
+          duration-300 transform hover:-translate-y-1 hover:scale-90'>
+          <a class="bg-black px-4 py-2 rounded-md text-white" href="#upload"> Upload</a>
+        </h3>
+        <h3 class='sm:mr-4 md:mr-4 lg:mr-6 xl:mr-10 mr-16'><a class="underline-animation" href="#contact">Contact</a></h3>
     </div>
   </nav>
 
-  <section class="py-16" id ="about">
+  <section class="py-16" id="about">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-8 ">About Our Application</h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">About Our Application 
+      </h2>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="bg-white rounded-lg shadow-lg p-6 transition-transform duration-300 transform hover:-translate-y-1 hover:scale-105">
           <h3 class="text-xl font-medium text-gray-900 mb-4 text-center">Image Masking with <span class="underline">AI</span></h3>
           <p class="text-gray-700 mb-4">Our application uses artificial intelligence to generate masks for user images based on the objects and landscapes detected in the image. With just a few clicks, you can easily select the mask that you want to save.</p>
         </div>
-        <div class="bg-white rounded-lg shadow-lg p-6">
-          <h3 class="text-xl font-medium text-gray-900 mb-4 text-center">Easy to Use</h3>
+        <div class="bg-white rounded-lg shadow-lg p-6 transition-transform duration-300 transform hover:-translate-y-1 hover:scale-105">
+          <h3 class="text-xl font-medium text-gray-900 mb-4 text-center"><s>Hard</s> <p></p>Easy to Use</h3>
           <p class="text-gray-700 mb-4">Our application is designed to be user-friendly and easy to use, even if you have no experience with image processing or AI. Simply upload your images and let our system do the rest!</p>
         </div>
-        <div class="bg-white rounded-lg shadow-lg p-6">
-          <h3 class="text-xl font-medium text-gray-900 mb-4 text-center">Customizable Settings</h3>
-          <p class="text-gray-700 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, earum deserunt! Neque cum itaque modi eaque veniam ut fuga, maxime soluta hic error et voluptatum fugiat officiis dignissimos repellat sint.</p>
+        <div class="bg-white rounded-lg shadow-lg p-6 transition-transform duration-300 transform hover:-translate-y-1 hover:scale-105">
+          <h3 class="text-xl font-medium text-gray-900 mb-4 text-center"><span class="font-bold">Multiple</span> Features</h3>
+          <p class="text-gray-700 mb-4">An intelligent backend as a forefront for mass production of the most creative images, maskr, has all the image creation features that allow for you to have your dream images come to fruition. Edit, create a variation, or even generate your own images with our application!</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class ="mb-36" id ="upload">
+  <section class ="mb-20" id ="upload">
     <form method="POST" enctype="multipart/form-data" id="upload-form" class="mb-20">
       {% csrf_token %}
       <div class="flex items-center justify-center relative">
         <input type="text" name="prompt" placeholder="Enter prompt here..." class="w-30 text-black font-ubuntu font-bold p-1 rounded-md mt-5"/>
-        <button class="text-sm font-medium bg-black rounded-lg text-white p-2  mt-5 ml-2 flex items-center gap-2"> Submit</button>
+        <button class="text-sm font-medium bg-black rounded-lg text-white p-2  mt-5 ml-2 flex items-center gap-2 hover:underline"> Submit</button>
       </div>
       <div class="w-full flex justify-center relative text-black p-4 rounded-lg mt-10">
-        <label for="file-upload" class="absolute bg-black rounded-lg text-white px-4 py-2 py flex items-center gap-2 hover:bg-gray-800 transition duration-200">
+        <label for="file-upload" class="absolute bg-black rounded-lg text-white px-4 py-2 py flex items-center gap-2 shadow-lg p-6 animate-bounce">
           <img class="w-5" src="{% static 'images/upload.png' %}" alt="">
           <span class="text-sm font-medium">Upload File</span>
         </label>
@@ -52,6 +56,33 @@
       </div>
     </form>
 
+    <div id="loading" class="flex items-center justify-center hidden">
+      <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var uploadForm = document.getElementById('upload-form');
+        var fileInput = document.getElementById('file-upload');
+        var loadingElement = document.getElementById('loading');
+    
+        if (uploadForm && fileInput && loadingElement) {
+          fileInput.addEventListener('change', function() {
+            uploadForm.submit();
+            loadingElement.classList.remove('hidden');
+          });
+    
+          uploadForm.addEventListener('submit', function() {
+            loadingElement.classList.remove('hidden');
+          });
+        }
+      });
+    </script>
 
     {% if uploaded %}
       <div id="screen" class="mx-auto grid grid-cols-2 justify-items-center">
@@ -59,26 +90,31 @@
           {% if processed %}
             <h2 class="text-xl font-ubuntu font-bold text-center p-2">Before</h2> 
           {% endif %}   
-          <img class="m-auto rounded-md w-[256px] h-[256px] max-h-[256px] max-w-[256px] object-fill" src="{{ uploaded }}" alt="Before Processed Image">
+          <img class="m-auto rounded-md object-fill" src="{{ uploaded }}" alt="Before Processed Image" width="256" height="256">
         </div>
         {% if processed %}
           <div class="w-1/2 bg-white rounded-lg p-4 mt-3">
             <h2 class="text-xl font-ubuntu font-bold text-center p-2">After</h2>
             <img class="m-auto rounded-md mb-6 object-fill" src="{{ processed }}" alt="After Processed Image">
-            <label class="text-md font-ubuntu font-bold p-2 bg-black text-white rounded-lg flex text-center justify-center w-[256px]"><a href="{{ processed }}">Save Image</a></label>
+            <label class="block text-md font-ubuntu font-bold p-2 bg-black text-white rounded-lg mt-4 w-full">
+              <a href="{{ processed }}" class="block w-full h-full text-center" download="processed_image.png">Save Image</a>
+            </label>
           </div>
         {% endif %}    
       </div>
     {% endif %}
 
+
     {% if processed and not uploaded %}
-    <div class="flex items-center justify-center">
-        <div class="w-full bg-white rounded-lg p-4 relative">
-          <h2 class="text-xl font-ubuntu font-bold text-center p-2">Created Image</h2>
-          <img class="m-auto rounded-md object-fill" src="{{ processed }}" alt="Created Image">
-          <label class="text-md font-ubuntu font-bold text-center p-2 bg-black text-white rounded-lg flex"><a href="{{ processed }}">Save Image</a></label>
-        </div>
-    </div>    
+    <div class="flex items-center justify-center h-screen mt--8 mb--8">
+      <div class="bg-white rounded-lg p-4 relative">
+        <h2 class="text-xl font-ubuntu font-bold text-center p-2">Created Image</h2>
+        <img class="m-auto rounded-md object-fill" src="{{ processed }}" alt="Created Image">
+        <label class="block text-md font-ubuntu font-bold text-center p-2 bg-black text-white rounded-lg mt-4 mx-auto w-36">
+          <a href="{{ processed }}" class="block w-full h-full text-center" download="processed_image.png">Save Image</a>
+        </label>
+      </div>
+    </div> 
     {% endif %}
   </section>
   
@@ -88,44 +124,52 @@
       <div class="flex ml-20 mr-20 justify-between">
         <!-- Github section -->
         <div class="mb-4 md:mb-0 sm:mb-0">
-          <h3 class="text-lg font-medium mb-2">Github</h3>
+          <h3 class="text-lg font-medium mb-2 flex">Github
+            <img class="flex ml-4" src="{% static 'images/github.png' %}" alt="github logo" width="25px" height="25px"/>
+          </h3>
           <ul class="space-y-1">
-            <li><a class="hover:underline" href="https://github.com/a-gorum">a-gorum</a></li>
-            <li><a class="hover:underline" href="https://github.com/aidanvancil">aidanvancil</a></li>
-            <li><a class="hover:underline" href="https://github.com/Buslon-Brian">Buslon-Brian</a></li>
+            <li><a class="underline-animation" href="https://github.com/a-gorum">a-gorum</a></li>
+            <li><a class="underline-animation" href="https://github.com/aidanvancil">aidanvancil</a></li>
+            <li><a class="underline-animation" href="https://github.com/Buslon-Brian">Buslon-Brian</a></li>
           </ul>
         </div>
   
         <!-- LinkedIn section -->
         <div class="mb-4 sm:mb-0 hidden sm:block">
-          <h3 class="text-lg font-medium mb-2">LinkedIn</h3>
+          <h3 class="text-lg font-medium mb-2 flex">LinkedIn
+            <img class="flex ml-4" src="{% static 'images/linkedin.png' %}" alt="linkedin logo" width="25px" height="25px"/>
+          </h3>
           <ul class="space-y-1">
-            <li><a class="hover:underline" href="#">Andrew G.</a></li>
-            <li><a class="hover:underline" href="https://www.linkedin.com/in/aidan-vancil">Aidan V.</a></li>
-            <li><a class="hover:underline" href="#">Brian B.</a></li>
+            <li><a class="underline-animation" href="#">Andrew G.</a></li>
+            <li><a class="underline-animation" href="https://www.linkedin.com/in/aidan-vancil">Aidan V.</a></li>
+            <li><a class="underline-animation" href="#">Brian B.</a></li>
           </ul>
         </div>
   
         <!-- Legal section -->
         <div class="mb-4 md:mb-0">
-          <h3 class="text-lg font-medium mb-2">Legal</h3>
+          <h3 class="text-lg font-medium mb-2 flex">Legal
+            <img class="flex ml-4" src="{% static 'images/balance.png' %}" alt="balance" width="25px" height="25px"/>
+          </h3>
           <ul class="space-y-1">
-            <li><a class="hover:underline" href="https://www.termsofservicegenerator.net/live.php?token=YZYhfT5R7sZgK9NCR5H9L4K2yqcqXDNr">Terms of Use</a></li>
-            <li><a class="hover:underline" href="https://www.gdprprivacypolicy.net/live.php?token=LzX5Nr833bV50I8hmQDf0Y2p8sr5tJab">Privacy Policy</a></li>
+            <li><a class="underline-animation" href="https://www.termsofservicegenerator.net/live.php?token=YZYhfT5R7sZgK9NCR5H9L4K2yqcqXDNr">Terms of Use</a></li>
+            <li><a class="underline-animation" href="https://www.gdprprivacypolicy.net/live.php?token=LzX5Nr833bV50I8hmQDf0Y2p8sr5tJab">Privacy Policy</a></li>
           </ul>
         </div>
   
         <!-- Contact section -->
         <div class="mb-4 md:mb-0 hidden md:block">
-          <h3 class="text-lg font-medium mb-2">Contact</h3>
+          <h3 class="text-lg font-medium mb-2 flex">Contact
+            <img class="flex ml-4" src="{% static 'images/email.png' %}" alt="email" width="25px" height="25px"/>
+          </h3>
           <ul class="space-y-1">
-            <li><a class="hover:underline" href="mailto:your-email@example.com?
+            <li><a class="underline-animation" href="mailto:your-email@example.com?
               subject=Questions%20For%20Aidan&
               body=Hello%20Aidan!%20I%20wanted%20to%20learn%20more%20about%20your%20website!">aidan.c.vancil@gmail.com</a></li>
-            <li><a class="hover:underline" href="mailto:your-email@example.com?
+            <li><a class="underline-animation" href="mailto:your-email@example.com?
               subject=Questions%20For%20Andrew&
               body=Hello%20Andrew!%20I%20wanted%20to%20learn%20more%20about%20your%20website!">agorum@nevada.unr.edu</a></li>
-            <li><a class="hover:underline" href="mailto:your-email@example.com?
+            <li><a class="underline-animation" href="mailto:your-email@example.com?
               subject=Questions%20For%20Brian&
               body=Hello%20Brian!%20I%20wanted%20to%20learn%20more%20about%20your%20website!">bbuslon@nevada.unr.edu</a></li>
           </ul>
