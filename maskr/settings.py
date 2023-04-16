@@ -33,6 +33,7 @@ MEDIA_URL = '/media/'
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+
 # Application definition
 STATICFILES_DIRS = [
     BASE_DIR / "maskr_app/static",
