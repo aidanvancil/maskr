@@ -29,6 +29,7 @@ class maskrView(View):
             image_obj = form.instance
             img_resized = Image.open(image_obj.image.path)
             img_resized = img_resized.resize((512, 512))
+            img_resized = img_resized.convert('RGBA')
             img_resized.save("demo.png", "")
             prompt_temp = prompt_t.replace(' ', '')
             if prompt_temp.isalpha():
